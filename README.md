@@ -1,0 +1,82 @@
+# Denial Workspace Layouts
+
+Per-workspace layout overrides + dashboard management UI for [Denial](https://github.com/denialwm/denial) Wayland compositor.
+
+## What it does
+
+- **Dashboard card** (win+I): manage workspace count (1-9) and per-workspace layout (stacking/dwindle/scrolling)
+- **Per-workspace layout overrides**: each workspace can have its own layout, independent of the global default
+- **`denialctl layout` CLI**: query/set/unset per-workspace layouts from terminal
+
+## Requirements
+
+- Denial >= 0.4.3
+- `denial-ui-development` package (provides `denial-ui` tool and patched Flutter SDK)
+- Rust toolchain (only if you want `denialctl layout` CLI; the dashboard card works without it)
+
+## Install
+
+### Quick (dashboard card only, no Rust compile)
+
+```bash
+git clone https://github.com/denialwm/denial.git
+cd denial
+curl -L https://github.com/SciNancy/denial-workspace-layouts/raw/main/workspace-layouts.patch | git apply -
+denial-ui prepare-profile
+denialctl ui profile
+```
+
+Then press win+I to see the workspaces card.
+
+### Full (with `denialctl layout` CLI)
+
+```bash
+git clone https://github.com/denialwm/denial.git
+cd denial
+curl -L https://github.com/SciNancy/denial-workspace-layouts/raw/main/workspace-layouts.patch | git apply -
+
+# Build Rust binaries (denialctl with layout commands)
+cargo build --release
+sudo cp target/release/denialctl /usr/bin/denialctl
+sudo cp target/release/deniald /usr/bin/deniald
+
+# Build and activate Dart UI
+denial-ui prepare-profile
+denialctl ui profile
+```
+
+### Persistent (survives reboot)
+
+Add to your shell rc file (`~/.bashrc` or `~/.zshrc`):
+
+```bash
+denial-branch() {
+  DENIAL_FLUTTER_BUNDLE="$HOME/.cache/denial/ui-development/profile/bundle" \
+    exec /usr/bin/denial-session "$@"
+}
+```
+
+Then launch with `denial-branch` instead of `denial-session`.
+
+## Update after Denial upgrade
+
+```bash
+cd denial
+git fetch origin main
+git rebase origin/main
+# resolve conflicts if any
+denial-ui prepare-profile
+denialctl ui profile
+```
+
+## Uninstall
+
+```bash
+denialctl ui restore
+```
+
+To also remove the Rust changes, reinstall the official denial package.
+
+## License
+
+GPL-3.0-or-later (same as Denial)
