@@ -1,0 +1,20 @@
+# Attribution
+
+This project is a patch against [Denial](https://github.com/denialwm/denial), a Wayland compositor by Doctor Logix and contributors.
+
+## Upstream
+
+- **Project**: Denial
+- **Repository**: https://github.com/denialwm/denial
+- **Copyright**: © 2026 Doctor Logix and contributors
+- **License**: GPL-3.0-only
+
+## This Patch
+
+- **Author**: SciNancy
+- **Scope**: Per-workspace layout overrides, dashboard management UI, `denialctl layout` CLI
+- **License**: GPL-3.0-or-later
+
+## Usage
+
+The patch modifies upstream Denial source code. When applied and built, the resulting binaries are derivative works of Denial and remain subject to the GPL-3.0 license of the upstream project.

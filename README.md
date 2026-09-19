@@ -2,6 +2,8 @@
 
 Per-workspace layout overrides + dashboard management UI for [Denial](https://github.com/denialwm/denial) Wayland compositor.
 
+> **Upstream**: This is a patch against [denialwm/denial](https://github.com/denialwm/denial). All Denial source code remains © Doctor Logix and contributors, licensed under GPL-3.0-only. This patch adds per-workspace layout management on top of upstream Denial.
+
 ## What it does
 
 - **Dashboard card** (win+I): manage workspace count (1-9) and per-workspace layout (stacking/dwindle/scrolling)
@@ -79,4 +81,7 @@ To also remove the Rust changes, reinstall the official denial package.
 
 ## License
 
-GPL-3.0-or-later (same as Denial)
+The patch content is licensed under GPL-3.0-or-later, matching upstream Denial.
+
+See [LICENSE](LICENSE) for the full GPL-3.0 license text.
+See [NOTICE](NOTICE) for upstream attribution.
